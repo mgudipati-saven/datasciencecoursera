@@ -17,5 +17,22 @@ run_analysis <- function() {
   har.test$Activity = factor(ytest[[1]], labels=actlabs[[2]])
   
   # Load the x test file into test data frame using the column names from features list.
-  har.test[as.character(features[[2]])] = read.table("./X_test.txt")  
+  har.test[as.character(features[[2]])] = read.table("./X_test.txt")
+  
+  # Create train data frame by loading the subject train file.
+  har.train = read.table("./subject_train.txt", col.names="Subject")  
+  
+  # Load the y train file.
+  ytrain = read.table("./y_train.txt")
+  
+  # Add Activity column to the train data frame using activity labels.
+  har.train$Activity = factor(ytrain[[1]], labels=actlabs[[2]])
+  
+  # Load the x train file into train data frame using the column names from features list.
+  har.train[as.character(features[[2]])] = read.table("./X_train.txt")
+  
+  ## Extracts only the measurements on the mean and standard deviation for each measurement. 
+  har.mean.std = har.total[,c("Subject", "Activity", grep("mean\\(|std\\(", names(har.total), value=T))]
+  
+  return(har.mean.std)
 }
