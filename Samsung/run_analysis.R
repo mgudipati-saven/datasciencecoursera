@@ -34,5 +34,13 @@ run_analysis <- function() {
   ## Extracts only the measurements on the mean and standard deviation for each measurement. 
   har.mean.std = har.total[,c("Subject", "Activity", grep("mean\\(|std\\(", names(har.total), value=T))]
   
-  return(har.mean.std)
+  ## Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
+  
+  # Melt the data frame using Subject and Activity as id variables
+  har.melt = melt(results, id=c("Subject", "Activity"))
+  
+  # Reshape the data and perform mean aggregation on Subject and Activity factor variables
+  har.aggregate = dcast(har.melt, Subject + Activity ~ variable, mean)
+  
+  return(har.aggregate)
 }
