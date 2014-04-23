@@ -1,9 +1,8 @@
-============================================================================
 Human Activity Recognition Using Smartphones - Run Analysis Script Explained
+============================================================================
 Version 1.0
-============================================================================
 Murty Gudipati
-============================================================================
+
 
 ### Files
 The run_analysis.R script assumes that the following files are present in the working directory:
