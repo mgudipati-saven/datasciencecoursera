@@ -1,4 +1,15 @@
 run_analysis <- function() {
+  ## Check for files.
+  if (!file.exists("./features.txt") 
+      || !file.exists("./activity_labels.txt")
+      || !file.exists("./subject_test.txt")
+      || !file.exists("./y_test.txt")
+      || !file.exists("./y_train.txt")
+      || !file.exists("./subject_test.txt")
+      || !file.exists("./y_test.txt")
+      || !file.exists("./y_train.txt")) {
+    stop("File(s) not found.")
+  }
   ## Merges the training and the test sets to create one data set.
   
   # Load the features.txt file for column names.
@@ -40,7 +51,7 @@ run_analysis <- function() {
   ## Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
   
   # Melt the data frame using Subject and Activity as id variables
-  har.melt = melt(results, id=c("Subject", "Activity"))
+  har.melt = melt(har.mean.std, id=c("Subject", "Activity"))
   
   # Reshape the data and perform mean aggregation on Subject and Activity factor variables
   har.aggregate = dcast(har.melt, Subject + Activity ~ variable, mean)
