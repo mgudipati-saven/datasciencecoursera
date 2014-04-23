@@ -31,6 +31,9 @@ run_analysis <- function() {
   # Load the x train file into train data frame using the column names from features list.
   har.train[as.character(features[[2]])] = read.table("./X_train.txt")
   
+  # Combine the train and test data sets.
+  har.total = rbind(har.train, har.test)
+  
   ## Extracts only the measurements on the mean and standard deviation for each measurement. 
   har.mean.std = har.total[,c("Subject", "Activity", grep("mean\\(|std\\(", names(har.total), value=T))]
   
